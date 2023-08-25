@@ -40,7 +40,11 @@ namespace FiguresLibTest
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 2, 2, 2, 5, 6 }); });
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1 }); });
             Assert.Throws<ArgumentException>(() => { polygon = new Polygon(new List<decimal> { 1, 2 }); });
+
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 2, 100 }); });
+            Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 100, 2, 1 }); });
+            Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 200, 1 }); });
+
             Assert.Throws<ArgumentException>(() => { circle = new Circle(0); });
             Assert.Throws<ArgumentException>(() => { circle = new Circle(-1); });
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 2, -2}); });
@@ -86,6 +90,11 @@ namespace FiguresLibTest
             trianglesAndRectangularFlag.AddRange(new List<Tuple<Triangle, bool>>()
             {
                 new Tuple<Triangle, bool>(new Triangle(3, 4, 5), true),
+                new Tuple<Triangle, bool>(new Triangle(5, 4, 3), true),
+                new Tuple<Triangle, bool>(new Triangle(5, 3, 4), true),
+                new Tuple<Triangle, bool>(new Triangle(4, 3, 5), true),
+                new Tuple<Triangle, bool>(new Triangle(4, 5, 3), true),
+                new Tuple<Triangle, bool>(new Triangle(3, 5, 4), true),
                 new Tuple<Triangle, bool>(new Triangle(5, 12, 13), true),
                 new Tuple<Triangle, bool>(new Triangle(8, 15, 17), true),
                 new Tuple<Triangle, bool>(new Triangle(9, 40, 41), true),

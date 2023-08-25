@@ -32,10 +32,10 @@ namespace FiguresLib
                     .ToList();
 
                 // стороны треугольника (для удобства и читаемости)
-                var a = value.ElementAt(2); // после упорядочивания a - вероятная сторона, нарушающая условие
+                var a = orderedSides.ElementAt(0); // после упорядочивания a - вероятная сторона, нарушающая условие
                                             // "ни одна из сторон треугольника не может быть больше суммы двух других его сторон"
-                var b = value.ElementAt(1);
-                var c = value.ElementAt(0);
+                var b = orderedSides.ElementAt(1);
+                var c = orderedSides.ElementAt(2);
 
                 if (a >= b + c)
                     throw new ArgumentException($"Side {a} is more than {b} + {c}!");
@@ -69,9 +69,9 @@ namespace FiguresLib
                 .ToList();
 
             // стороны треугольника (для удобства и читаемости)
-            var a = Sides.ElementAt(0); 
-            var b = Sides.ElementAt(1);
-            var c = Sides.ElementAt(2); // после упорядочивания c - вероятная гипотенуза
+            var c = orderedSides.ElementAt(0); // после упорядочивания c - вероятная гипотенуза
+            var b = orderedSides.ElementAt(1);
+            var a = orderedSides.ElementAt(2); 
 
             return (a * a + b * b == c * c);
         }
