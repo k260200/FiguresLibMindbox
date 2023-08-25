@@ -17,6 +17,7 @@ namespace FiguresLibTest
             Circle circle;
             Polygon polygon;
 
+            // Корректная инициализация
             Assert.DoesNotThrow(() =>
             {
                 figure = new Circle();
@@ -32,19 +33,23 @@ namespace FiguresLibTest
                 polygon.Sides = new List<decimal> { 1, 2, 2, 2, 5, 6 };
             });
 
+            // Проверка корректности числа сторон
             triangle = new Triangle(1, 1, 1);
             Assert.That(triangle.AmountOfSides, Is.EqualTo(3));
             triangle = new Triangle();
             Assert.That(triangle.AmountOfSides, Is.EqualTo(3));
 
+            // Некорректное число сторон при инициализации
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 2, 2, 2, 5, 6 }); });
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1 }); });
             Assert.Throws<ArgumentException>(() => { polygon = new Polygon(new List<decimal> { 1, 2 }); });
 
+            // Одна из сторон треугольника больше суммы двух других его сторон
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 2, 100 }); });
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 100, 2, 1 }); });
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 200, 1 }); });
 
+            // Нулевые и отрицательные стороны
             Assert.Throws<ArgumentException>(() => { circle = new Circle(0); });
             Assert.Throws<ArgumentException>(() => { circle = new Circle(-1); });
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(new List<decimal> { 1, 2, -2}); });
@@ -52,10 +57,10 @@ namespace FiguresLibTest
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(1, 2, 0); });
             Assert.Throws<ArgumentException>(() => { triangle = new Triangle(1, 2, -1); });
 
+            // null список сторон
             List<decimal> nullList = null;
             Assert.Throws<ArgumentNullException>(() => { figure = new Triangle(nullList); });
             Assert.Throws<ArgumentNullException>(() => { figure = new Polygon(nullList); });
-
             triangle = new Triangle();
             polygon = new Polygon();
             Assert.Throws<ArgumentNullException>(() => { triangle.Sides = nullList; });
